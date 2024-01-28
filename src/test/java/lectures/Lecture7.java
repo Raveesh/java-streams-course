@@ -4,6 +4,7 @@ package lectures;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import beans.Car;
+import beans.Person;
 import com.google.common.collect.ImmutableList;
 import java.math.BigDecimal;
 import java.util.DoubleSummaryStatistics;
@@ -16,24 +17,42 @@ public class Lecture7 {
 
   @Test
   public void count() throws Exception {
+    ImmutableList<Person> people = MockData.getPeople();
+
+    long female = people.stream()
+            .filter(person -> person.getGender().equalsIgnoreCase("female"))
+            .count();
+    System.out.println("female = " + female);
 
   }
 
   @Test
   public void min() throws Exception {
+    ImmutableList<Car> cars = MockData.getCars();
+    double yellow = cars.stream().filter(car -> car.getColor().equalsIgnoreCase("yellow"))
+            .mapToDouble(Car::getPrice)
+            .min().orElse(0.0);
+    System.out.println("yellow = " + yellow);
 
   }
 
   @Test
   public void max() throws Exception {
-
+    ImmutableList<Car> cars = MockData.getCars();
+    double yellow = cars.stream().filter(car -> car.getColor().equalsIgnoreCase("yellow"))
+            .mapToDouble(Car::getPrice)
+            .max().orElse(0.0);
+    System.out.println("yellow = " + yellow);
   }
 
 
   @Test
   public void average() throws Exception {
     List<Car> cars = MockData.getCars();
-
+    double yellow = cars.stream().filter(car -> car.getColor().equalsIgnoreCase("yellow"))
+            .mapToDouble(Car::getPrice)
+            .average().orElse(0.0);
+    System.out.println("yellow = " + yellow);
   }
 
   @Test

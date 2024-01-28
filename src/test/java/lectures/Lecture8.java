@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.ImmutableList;
 import mockdata.MockData;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
@@ -16,6 +18,10 @@ public class Lecture8 {
 
   @Test
   public void simpleGrouping() throws Exception {
+
+    ImmutableList<Car> cars = MockData.getCars();
+    Map<String, List<Car>> collect = cars.stream().collect(Collectors.groupingBy(Car::getMake));
+    System.out.println(collect);
 
   }
 
@@ -34,6 +40,8 @@ public class Lecture8 {
             "Alex"
         );
 
+    Map<String, Long> collect = names.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    System.out.println(collect);
 
   }
 
